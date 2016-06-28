@@ -14,6 +14,11 @@ class MainViewController: UIViewController {
   
   // MARK: Lifecycle
   
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    setupAnimation()
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupAnimateView()
@@ -43,6 +48,20 @@ class MainViewController: UIViewController {
     shapeLayer.fillColor = UIColor.clearColor().CGColor
     shapeLayer.strokeColor = UIColor.blueColor().CGColor
     animateView.layer.addSublayer(shapeLayer)
+  }
+  
+  private func setupAnimation() {
+    let animationDown = CABasicAnimation()
+    animationDown.keyPath = "position.y"
+    animationDown.fromValue = 150.0
+    animationDown.toValue = 300.0
+    animationDown.duration = 2.5
+    animationDown.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
+    
+    let animationGroup = CAAnimationGroup()
+    animationGroup.animations = [animationDown]
+    animationGroup.duration = 2.5
+    animateView.layer.addAnimation(animationGroup, forKey: "loading")
   }
   
 }
