@@ -55,12 +55,28 @@ class MainViewController: UIViewController {
     animationDown.keyPath = "position.y"
     animationDown.fromValue = 150.0
     animationDown.toValue = 300.0
-    animationDown.duration = 2.5
+    animationDown.duration = 1.5
     animationDown.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
     
+    let animationRotation = CABasicAnimation()
+    animationRotation.keyPath = "transform.rotation.z"
+    animationRotation.fromValue = 0.0
+    animationRotation.toValue = 2.0 * M_PI
+    animationRotation.duration = 1.5
+    animationRotation.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionLinear)
+    
+    let animationUp = CABasicAnimation()
+    animationUp.keyPath = "position.y"
+    animationUp.fromValue = 300.0
+    animationUp.toValue = 150.0
+    animationUp.duration = 1.0
+    animationUp.beginTime = 1.5
+    animationUp.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
+    
     let animationGroup = CAAnimationGroup()
-    animationGroup.animations = [animationDown]
+    animationGroup.animations = [animationDown, animationRotation, animationUp]
     animationGroup.duration = 2.5
+    animationGroup.repeatCount = 99.0
     animateView.layer.addAnimation(animationGroup, forKey: "loading")
   }
   
