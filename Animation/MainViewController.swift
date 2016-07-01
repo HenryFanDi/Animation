@@ -10,6 +10,9 @@ import UIKit
 
 class MainViewController: UIViewController {
   
+  private let fromValue = 150.0 as CGFloat
+  private let toValue = 300.0 as CGFloat
+  
   private var animateView = UIView()
   
   // MARK: Lifecycle
@@ -36,7 +39,7 @@ class MainViewController: UIViewController {
     let viewWidth = 40.0 as CGFloat
     let viewHeight = viewWidth as CGFloat
     let offsetX = (screenWidth - viewWidth) / 2.0 as CGFloat
-    let offsetY = 150.0 as CGFloat
+    let offsetY = fromValue as CGFloat
     animateView = UIView.init(frame: CGRectMake(offsetX, offsetY, viewWidth, viewHeight))
     animateView.backgroundColor = UIColor.whiteColor()
     view.addSubview(animateView)
@@ -53,8 +56,8 @@ class MainViewController: UIViewController {
   private func setupAnimation() {
     let animationDown = CABasicAnimation()
     animationDown.keyPath = "position.y"
-    animationDown.fromValue = 150.0
-    animationDown.toValue = 300.0
+    animationDown.fromValue = fromValue
+    animationDown.toValue = toValue
     animationDown.duration = 1.5
     animationDown.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
     
@@ -67,8 +70,8 @@ class MainViewController: UIViewController {
     
     let animationUp = CABasicAnimation()
     animationUp.keyPath = "position.y"
-    animationUp.fromValue = 300.0
-    animationUp.toValue = 150.0
+    animationUp.fromValue = toValue
+    animationUp.toValue = fromValue
     animationUp.duration = 1.0
     animationUp.beginTime = 1.5
     animationUp.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionEaseInEaseOut)
