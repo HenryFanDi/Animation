@@ -10,14 +10,14 @@ import UIKit
 
 class MainViewController: UIViewController {
   
-  private let fromValue = 150.0 as CGFloat
-  private let toValue = 300.0 as CGFloat
+  fileprivate let fromValue = 150.0 as CGFloat
+  fileprivate let toValue = 300.0 as CGFloat
   
-  private var animateView = UIView()
+  fileprivate var animateView = UIView()
   
   // MARK: Lifecycle
   
-  override func viewDidAppear(animated: Bool) {
+  override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     setupAnimation()
   }
@@ -34,26 +34,26 @@ class MainViewController: UIViewController {
   
   // MARK: Private
   
-  private func setupAnimateView() {
-    let screenWidth = CGRectGetWidth(UIScreen.mainScreen().bounds) as CGFloat
+  fileprivate func setupAnimateView() {
+    let screenWidth = UIScreen.main.bounds.width as CGFloat
     let viewWidth = 40.0 as CGFloat
     let viewHeight = viewWidth as CGFloat
     let offsetX = (screenWidth - viewWidth) / 2.0 as CGFloat
     let offsetY = fromValue as CGFloat
-    animateView = UIView.init(frame: CGRectMake(offsetX, offsetY, viewWidth, viewHeight))
-    animateView.backgroundColor = UIColor.whiteColor()
+    animateView = UIView.init(frame: CGRect(x: offsetX, y: offsetY, width: viewWidth, height: viewHeight))
+    animateView.backgroundColor = UIColor.white
     view.addSubview(animateView)
   }
   
-  private func setupShapeLayer() {
+  fileprivate func setupShapeLayer() {
     let shapeLayer = CAShapeLayer.init()
-    shapeLayer.path = UIBezierPath.init(rect: animateView.bounds).CGPath
-    shapeLayer.fillColor = UIColor.clearColor().CGColor
-    shapeLayer.strokeColor = UIColor.blueColor().CGColor
+    shapeLayer.path = UIBezierPath.init(rect: animateView.bounds).cgPath
+    shapeLayer.fillColor = UIColor.clear.cgColor
+    shapeLayer.strokeColor = UIColor.blue.cgColor
     animateView.layer.addSublayer(shapeLayer)
   }
   
-  private func setupAnimation() {
+  fileprivate func setupAnimation() {
     let animationDown = CABasicAnimation()
     animationDown.keyPath = "position.y"
     animationDown.fromValue = fromValue
@@ -64,7 +64,7 @@ class MainViewController: UIViewController {
     let animationRotation = CABasicAnimation()
     animationRotation.keyPath = "transform.rotation.z"
     animationRotation.fromValue = 0.0
-    animationRotation.toValue = 2.0 * M_PI
+    animationRotation.toValue = 2.0 * Float.pi
     animationRotation.duration = 1.5
     animationRotation.timingFunction = CAMediaTimingFunction.init(name: kCAMediaTimingFunctionLinear)
     
@@ -80,7 +80,7 @@ class MainViewController: UIViewController {
     animationGroup.animations = [animationDown, animationRotation, animationUp]
     animationGroup.duration = 2.5
     animationGroup.repeatCount = 99.0
-    animateView.layer.addAnimation(animationGroup, forKey: "loading")
+    animateView.layer.add(animationGroup, forKey: "loading")
   }
   
 }
